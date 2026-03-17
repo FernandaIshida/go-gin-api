@@ -1,0 +1,23 @@
+# Environment variables
+.env
+
+# Build
+/bin/
+/dist/
+
+# Go
+*.exe
+*.test
+*.out
+vendor/
+
+# IDE
+.vscode/
+.idea/
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Docker
+postgres-data/
