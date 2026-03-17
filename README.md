@@ -1,2 +1,88 @@
 # go-gin-api
-Student management API using Go, Gin, Gorm &amp; RabbitMQ
+
+![Go](https://img.shields.io/badge/Go-1.21-blue) 
+![Gin](https://img.shields.io/badge/Gin-1.9-lightgrey) 
+![Gorm](https://img.shields.io/badge/Gorm-2.0-lightgrey) 
+![PostgreSQL](https://img.shields.io/badge/PostgreSQL-15-blue) 
+![RabbitMQ](https://img.shields.io/badge/RabbitMQ-3.12-orange)
+![Docker](https://img.shields.io/badge/Docker-24.0-blue)
+
+**Student management API using Go, Gin, Gorm & RabbitMQ**  
+
+A REST API to manage student data with Go, Gin framework, Gorm ORM, and PostgreSQL. Event-driven architecture with RabbitMQ is integrated for asynchronous processing.
+
+---
+
+## Tech Stack
+
+- **Language:** Go  
+- **Framework:** Gin  
+- **ORM:** Gorm  
+- **Database:** PostgreSQL (Docker)  
+- **Messaging:** RabbitMQ  
+- **Containerization:** Docker / Docker Compose  
+
+---
+
+## Features
+
+- Full CRUD operations for students (`POST`, `GET`, `PUT`, `DELETE`)  
+- GET endpoint to list all students  
+- Messaging with RabbitMQ for asynchronous processing (e.g., student registration confirmation)  
+- Structured project following Go best practices  
+- Run locally via Docker Compose  
+
+---
+
+## Setup
+
+### Prerequisites
+
+- **Go 1.21+** – to run the API  
+- **Docker 24+** – to containerize Postgres, RabbitMQ, and the API  
+- **Docker Compose 2+** – to run all services with one command  
+
+---
+
+### Run with Docker Compose
+
+```bash
+docker-compose up -d
+```
+
+This will start:
+
+PostgreSQL database
+
+RabbitMQ message broker
+
+Go Gin API
+
+API will be available at: http://localhost:8080
+
+---
+
+### Endpoints
+
+| Method | Endpoint       | Description                  |
+|--------|----------------|------------------------------|
+| GET    | /students      | List all students            |
+| POST   | /students      | Create a new student         |
+| PUT    | /students/:id  | Update a student             |
+| DELETE | /students/:id  | Delete a student             |
+
+### Project Structure
+
+
+### Notes
+
+This project is part of a [Dev Journey](https://github.com/FernandaIshida/dev-journey/blob/main/README.md): exploring backend development across multiple technologies:
+
+- **Go, Gin, Gorm** – building REST APIs with event-driven architecture  
+- **PostgreSQL** – relational database experience  
+- **RabbitMQ** – asynchronous messaging  
+- **Python & Django/DRF / FastAPI** – building APIs, microsservices, and automations  
+- **Docker** – containerization and environment management  
+
+It demonstrates full CRUD functionality, API design best practices, and event-driven development, while connecting this Go project to my wider learning path in backend engineering.
+
