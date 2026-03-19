@@ -93,7 +93,7 @@ go run consumer.go
 ---
 
 ### Project Structure
-```
+```text
 go-gin-api/
 ├── main.go # Entry point of the application
 ├── consumer.go # RabbitMQ consumer
