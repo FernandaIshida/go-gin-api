@@ -3,13 +3,13 @@
 ![Go](https://img.shields.io/badge/Go-1.21-blue) 
 ![Gin](https://img.shields.io/badge/Gin-1.9-lightgrey) 
 ![Gorm](https://img.shields.io/badge/Gorm-2.0-lightgrey) 
-![PostgreSQL](https://img.shields.io/badge/PostgreSQL-15-blue) 
+![PostgreSQL](https://img.shields.io/badge/PostgreSQL-18-blue) 
 ![RabbitMQ](https://img.shields.io/badge/RabbitMQ-3.12-orange)
 ![Docker](https://img.shields.io/badge/Docker-24.0-blue)
 
-**Student management API using Go, Gin, Gorm & RabbitMQ**  
+**Student Management API using Go, Gin, GORM, PostgreSQL & RabbitMQ**
 
-A REST API to manage student data with Go, Gin framework, Gorm ORM, and PostgreSQL. Event-driven architecture with RabbitMQ is integrated for asynchronous processing.
+A RESTful API that supports full CRUD operations for students and uses event-driven messaging with RabbitMQ. Includes Docker Compose setup for easy local development.
 
 ---
 
@@ -17,8 +17,8 @@ A REST API to manage student data with Go, Gin framework, Gorm ORM, and PostgreS
 
 - **Language:** Go  
 - **Framework:** Gin  
-- **ORM:** Gorm  
-- **Database:** PostgreSQL (Docker)  
+- **ORM:** GORM  
+- **Database:** PostgreSQL  
 - **Messaging:** RabbitMQ  
 - **Containerization:** Docker / Docker Compose  
 
@@ -44,7 +44,9 @@ A REST API to manage student data with Go, Gin framework, Gorm ORM, and PostgreS
 
 ---
 
-### Run with Docker Compose
+### Runing with Docker Compose
+
+Run all services (PostgreSQL + RabbitMQ + API):
 
 ```bash
 docker-compose up -d
@@ -52,11 +54,11 @@ docker-compose up -d
 
 This will start:
 
-PostgreSQL database
+* PostgreSQL database
 
-RabbitMQ message broker
+* RabbitMQ message broker
 
-Go Gin API
+* Go Gin API
 
 API will be available at: http://localhost:8080
 
@@ -64,15 +66,54 @@ API will be available at: http://localhost:8080
 
 ### Endpoints
 
-| Method | Endpoint       | Description                  |
-|--------|----------------|------------------------------|
-| GET    | /students      | List all students            |
-| POST   | /students      | Create a new student         |
-| PUT    | /students/:id  | Update a student             |
-| DELETE | /students/:id  | Delete a student             |
+| Method | Endpoint               | Description                        |
+|--------|-----------------------|-------------------------------------|
+| GET    | /students             | Get all students                    |
+| GET    | /students/:id         | Get a student by ID                 |
+| GET    | /students/cpf/:cpf    | Search for a student by CPF         |
+| POST   | /students             | Create a new student                |
+| PATCH  | /students/:id         | Update an existing student by ID    |
+| DELETE | /students/:id         | Delete a student by ID              | 
+
+---
+
+## Messaging with RabbitMQ
+
+This project uses RabbitMQ for asynchronous messaging. 
+
+- **Consumer:** `consumer.go` listens to the `students_queue` queue.
+- It processes messages related to student data (for example, creating or updating students asynchronously).
+- Ensure RabbitMQ is running (`docker-compose up`) before starting the consumer.
+- Start the consumer:
+
+```bash
+go run consumer.go
+```
+
+---
 
 ### Project Structure
 
+go-gin-api/
+├── main.go # Entry point of the application
+├── consumer.go # RabbitMQ consumer
+├── controllers/ # API endpoint handlers
+├── routes/ # Route definitions
+├── models/ # Database models (GORM)
+├── database/ # PostgreSQL connection and setup
+├── messaging/ # RabbitMQ connection and helpers
+├── docker-compose.yml
+├── go.mod
+├── go.sum
+└── README.md
+
+---
+
+## License
+
+MIT License
+
+---
 
 ### Notes
 
